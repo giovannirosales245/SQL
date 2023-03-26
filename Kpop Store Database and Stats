@@ -1,0 +1,32 @@
+-- Create a Story Database
+
+CREATE TABLE kpop_records 
+(id INTEGER PRIMARY KEY, group_name TEXT, record_name TEXT, price NUMERIC, year INTEGER, inventory INTEGER);
+
+INSERT INTO kpop_records
+VALUES
+(1, "Blackpink", "Born Pink", 250.99, 2023, 6),
+(2, "BTS", "Life Goes On", 200, 2022, 10),
+(3, "Loona", "We Are", 150.99, 2021, 45),
+(4, "Blackpink", "THE ALBUM", 200.99, 2021, 12),
+(5, "Blackpink", "SQUARE ONE", 300.50, 2019, 3),
+(6, "BTS", "Proof", 200, 2022, 65),
+(7, "BTS", "Love Yourself", 200, 2018, 34),
+(8, "BTS", "Map of the Soul", 200, 2020, 23),
+(9, "Blackpink", "SQUARE TWO", 300.50, 2016, 12),
+(10, "SEVENTEEN", "Face the Sun", 150, 2022, 2),
+(11, "SEVENTEEN", "SECTOR 17", 99.99, 2022, 4),
+(12, "SEVENTEEN", "Attacca", 150, 2021, 35), 
+(13, "Twice", "Formula of Love", 119.95, 2021, 9), 
+(14, "Twice", "More & More", 99.99, 2020, 32), 
+(15, "Twice", "Feel Special", 150, 2019, 23);
+
+-- Display the Database ordered by price
+
+Select * FROM kpop_records ORDER BY price desc;
+
+-- What's the total inventory of items available sorted by price?
+
+SELECT price, SUM(inventory) FROM kpop_records 
+GROUP BY price 
+ORDER BY price desc; 
