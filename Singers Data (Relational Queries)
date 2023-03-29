@@ -1,0 +1,69 @@
+--Create table about the people and what they do here
+CREATE TABLE singers 
+(id INTEGER PRIMARY KEY AUTOINCREMENT, 
+name TEXT,
+song TEXT);
+
+INSERT INTO singers (name, song)
+VALUES
+("Ed Sheeran", "Perfect"),
+("Michael Jackson", "Thriller"),
+("Beyonce", "Halo"),
+("BTS", "Butter"),
+("Shawn Mendes", "Mercy"),
+("Zedd", "Clarity");
+
+CREATE TABLE singers_country
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+singer_id INTEGER,
+country TEXT);
+
+INSERT INTO singers_country (singer_id, country)
+VALUES
+(4, "KOREA"),
+(2, "USA"),
+(1, "UK"), 
+(3, "USA"),
+(5, "CANADA"), 
+(6, "USA");
+
+CREATE TABLE singers_grammy
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+singer_id INTEGER, 
+wins INTEGER);
+
+INSERT INTO singers_grammy (singer_id, wins)
+VALUES
+(1, 4),
+(2, 13),
+(3, 32),
+(4, 0),
+(5, 0),
+(6, 1);
+
+CREATE TABLE collaborations 
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+singer1_id INTEGER, 
+singer2_id INTEGER);
+
+INSERT INTO collaborations (singer1_id, singer2_id)
+VALUES
+(1, 3),
+(1, 5),
+(5, 6);
+
+--Joining Table 1, 2, & 3 to display Name of Artist, Main Hit, Country of Origin
+SELECT name as Name, song as Main_Hit, country.country as Country
+    FROM singers
+    OUTER LEFT JOIN singers_country as country
+    ON singers.id = country.singer_id
+    OUTER LEFT JOIN singers_grammy as grammys
+    ON singers.id = grammys.singer_id;
+    
+--Joining the same table to correlate data based on the same ID (Artist Collaborations)
+SELECT a.name as Artist_1, b.name as Artist_2
+    FROM collaborations
+    JOIN singers a
+    ON collaborations.singer1_id = a.id
+    JOIN singers b
+    ON collaborations.singer2_id = b.id;
